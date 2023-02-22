@@ -2,49 +2,19 @@ import 'package:flutter/material.dart';
 
 class ListProduct extends StatelessWidget {
   ListProduct({super.key});
-  final List nameProduct = [
-    "OPPO",
-    "XIAOMI",
-    "SAMSUNG",
-    "IPHONE",
-    "REALME",
-    "REDMI",
-    "INFINIX",
-    "POCO",
-    "ASUS",
-    "VIVO",
-    "NOKIA",
-    "ADVAN BARCA"
-  ];
-
-  final List photos = [
-    "https://fdn2.gsmarena.com/vv/bigpic/oppo-reno8-t-4g.jpg",
-    "https://fdn2.gsmarena.com/vv/bigpic/oppo-a58.jpg",
-    "https://fdn2.gsmarena.com/vv/bigpic/oppo-a58.jpg",
-    "https://fdn2.gsmarena.com/vv/bigpic/oppo-a58.jpg",
-    "https://fdn2.gsmarena.com/vv/bigpic/oppo-a58.jpg",
-    "https://fdn2.gsmarena.com/vv/bigpic/oppo-a58.jpg",
-    "https://fdn2.gsmarena.com/vv/bigpic/oppo-reno8-t-4g.jpg",
-    "https://fdn2.gsmarena.com/vv/bigpic/oppo-a58.jpg",
-    "https://fdn2.gsmarena.com/vv/bigpic/oppo-a58.jpg",
-    "https://fdn2.gsmarena.com/vv/bigpic/oppo-a58.jpg",
-    "https://fdn2.gsmarena.com/vv/bigpic/oppo-a58.jpg",
-    "https://fdn2.gsmarena.com/vv/bigpic/oppo-a58.jpg",
-  ];
-
-  final List desc = [
-    "Lorem ipsum sit amet dolor",
-    "Lorem ipsum sit amet dolor",
-    "Lorem ipsum sit amet dolor",
-    "Lorem ipsum sit amet dolor",
-    "Lorem ipsum sit amet dolor",
-    "Lorem ipsum sit amet dolor",
-    "Lorem ipsum sit amet dolor",
-    "Lorem ipsum sit amet dolor",
-    "Lorem ipsum sit amet dolor",
-    "Lorem ipsum sit amet dolor",
-    "Lorem ipsum sit amet dolor",
-    "Lorem ipsum sit amet dolor",
+  List<Map<String, dynamic>> product = [
+    {
+      "name": "OPPO",
+      "photos": "https://fdn2.gsmarena.com/vv/bigpic/oppo-reno8-t-4g.jpg",
+      "desc": "Lorem ipsum sit amet dolor",
+      "price": 2000000,
+    },
+    {
+      "name": "SAMSUNG",
+      "photos": "https://fdn2.gsmarena.com/vv/bigpic/oppo-reno8-t-4g.jpg",
+      "desc": "Lorem ipsum sit amet dolor",
+      "price": 3000000,
+    }
   ];
 
   @override
@@ -54,22 +24,31 @@ class ListProduct extends StatelessWidget {
       child: ListView.builder(
         itemBuilder: (context, index) {
           return Card(
+            margin: EdgeInsets.only(bottom: 16),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Image.network(photos[index]),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(product[index]['photos']),
+                ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(nameProduct[index]),
-                    Text(desc[index]),
+                    Text(product[index]['name']),
+                    Text(
+                      product[index]['desc'],
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
+                    Text("Price : ${product[index]['price']}")
                   ],
                 )
               ],
             ),
           );
         },
-        itemCount: nameProduct.length,
+        itemCount: product.length,
       ),
     );
   }
